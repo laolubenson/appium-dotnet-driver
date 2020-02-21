@@ -1,21 +1,22 @@
 ﻿using Appium.Net.Integration.Tests.helpers;
 using NUnit.Framework;
 using OpenQA.Selenium.Appium;
-using OpenQA.Selenium.Appium.iOS;
+using OpenQA.Selenium.Appium.Enums;
+using OpenQA.Selenium.Appium.Mac;
 
-namespace Appium.Net.Integration.Tests.IOS
+namespace Appium.Net.Integration.Tests.Mac
 {
-    [TestFixture]
-    class LocationTest
+    public class FindElementTest
     {
-        private AppiumDriver<IOSElement> _driver;
+        private AppiumDriver<MacElement> _driver;
 
         [OneTimeSetUp]
         public void BeforeAll()
         {
-            var capabilities = Caps.GetIosCaps(Apps.Get("iosTestApp"));
+            var capabilities = new AppiumOptions();
+            capabilities.AddAdditionalCapability(MobileCapabilityType.DeviceName, "Mac"); // Requires until Appium 1.15.1
             var serverUri = Env.ServerIsRemote() ? AppiumServers.RemoteServerUri : AppiumServers.LocalServiceUri;
-            _driver = new IOSDriver<IOSElement>(serverUri, capabilities, Env.InitTimeoutSec);
+            _driver = new MacDriver<MacElement>(serverUri, capabilities, Env.InitTimeoutSec);
             _driver.Manage().Timeouts().ImplicitWait = Env.ImplicitTimeoutSec;
         }
 
@@ -30,14 +31,9 @@ namespace Appium.Net.Integration.Tests.IOS
         }
 
         [Test]
-        public void SetLocationTest()
+        public void ClickFinderIconOnDoc()
         {
-            var l = new Location();
-            l.Altitude = 10;
-            l.Longitude = 10;
-            l.Latitude = 10;
-            _driver.Location = l;
-            //var l1 = driver.Location;
+            _driver.FindElementByXPath("/AXApplication[@AXTitle='Dock']/AXList[0]/AXDockItem[@AXTitle='Finder']").Click();
         }
     }
 }
