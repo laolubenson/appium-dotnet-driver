@@ -45,6 +45,10 @@ namespace OpenQA.Selenium.Appium
         /// </summary>
         public const string ToggleAirplaneMode = "toggleAirplaneMode";
 
+        /// <summary>
+        /// Set GSM voice state
+        /// </summary>
+        public static string SetGsmVoiceState = "gsm_voice";
 
         /// <summary>
         /// Toggle Network Data Command
