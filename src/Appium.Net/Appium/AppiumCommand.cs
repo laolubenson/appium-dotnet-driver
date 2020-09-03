@@ -47,8 +47,19 @@ namespace OpenQA.Selenium.Appium
                 "/session/{sessionId}/appium/device/toggle_airplane_mode"),
             new AppiumCommand(CommandInfo.PostCommand, AppiumDriverCommand.ToggleData,
                 "/session/{sessionId}/appium/device/toggle_data"),
+
+            #endregion
+
+            #region Device System Commands
+
+            new AppiumCommand(CommandInfo.PostCommand, AppiumDriverCommand.OpenNotifications,
+                "/session/{sessionId}/appium/device/open_notifications"),
+            new AppiumCommand(CommandInfo.GetCommand, AppiumDriverCommand.SystemTime,
+                "/session/{sessionId}/appium/device/system_time"),
             new AppiumCommand(CommandInfo.GetCommand, AppiumDriverCommand.SystemBars,
                 "/session/{sessionId}/appium/device/system_bars"),
+            new AppiumCommand(CommandInfo.GetCommand, AppiumDriverCommand.GetDisplayDensity,
+                "/session/{sessionId}/appium/device/display_density"),
 
             #endregion
 
@@ -108,8 +119,6 @@ namespace OpenQA.Selenium.Appium
                 "/session/{sessionId}/appium/device/hide_keyboard"),
             new AppiumCommand(CommandInfo.GetCommand, AppiumDriverCommand.IsKeyboardShown,
                 "/session/{sessionId}/appium/device/is_keyboard_shown"),
-            new AppiumCommand(CommandInfo.PostCommand, AppiumDriverCommand.OpenNotifications,
-                "/session/{sessionId}/appium/device/open_notifications"),
             new AppiumCommand(CommandInfo.PostCommand, AppiumDriverCommand.StartActivity,
                 "/session/{sessionId}/appium/device/start_activity"),
             new AppiumCommand(CommandInfo.GetCommand, AppiumDriverCommand.GetSettings,

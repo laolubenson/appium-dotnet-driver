@@ -127,6 +127,16 @@ namespace OpenQA.Selenium.Appium
         public const string SystemBars = "system_bars";
 
         /// <summary>
+        /// Get System Bars
+        /// </summary>
+        public const string SystemTime = "system_time";
+
+        /// <summary>
+        /// Get Display Density
+        /// </summary>
+        public const string GetDisplayDensity = "display_density";
+
+        /// <summary>
         /// Toggle Location Services Command.
         /// </summary>
         public const string ToggleLocationServices = "toggleLocationServices";
@@ -160,11 +170,6 @@ namespace OpenQA.Selenium.Appium
         ///  Get App Strings Command.
         /// </summary>
         public const string GetAppStrings = "getAppStrings";
-
-        /// <summary>
-        /// Get Display Density
-        /// </summary>
-        public const string GetDisplayDensity = "display_density";
 
         /// <summary>
         /// Get App State Command.

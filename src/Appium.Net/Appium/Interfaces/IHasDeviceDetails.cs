@@ -8,5 +8,11 @@ namespace OpenQA.Selenium.Appium.Interfaces
         /// Retrieve visibility and bounds information of the status and navigation bars
         /// </summary>
         IDictionary<string, object> GetSystemBars();
+
+        /// <summary>
+        /// Retrieve display density(dpi) of the Android device
+        /// </summary>
+        /// <returns></returns>
+        float GetDisplayDensity();
     }
 }

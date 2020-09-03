@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Appium.Net.Integration.Tests.helpers;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -11,11 +7,10 @@ using OpenQA.Selenium.Appium.Android;
 
 namespace Appium.Net.Integration.Tests.Android.Device
 {
-    internal class NetworkTests
+    internal class SystemTests
     {
         private AppiumDriver<IWebElement> _driver;
         private AppiumOptions _androidOptions;
-        private const string ApiDemosPackageName = "io.appium.android.apis";
 
         [OneTimeSetUp]
         public void SetUp()
@@ -34,26 +29,6 @@ namespace Appium.Net.Integration.Tests.Android.Device
         }
 
         [Test]
-        public void CanToggleData()
-        {
-            _driver.ToggleData();
-            _driver.ToggleData();
-        }
-
-        [Test]
-        public void CanToggleAirplaneModeTest()
-        {
-            var androidDriver = (AndroidDriver<IWebElement>)_driver;
-
-            androidDriver.ToggleAirplaneMode();
-            
-            var currentConnectionType = androidDriver.ConnectionType;
-            Assert.That(currentConnectionType, Is.EqualTo(ConnectionType.AirplaneMode));
-
-            androidDriver.ToggleAirplaneMode();
-        }
-
-        [Test]
         public void CanGetSystemBarInfoTest()
         {
             var androidDriver = (AndroidDriver<IWebElement>)_driver;
@@ -64,9 +39,6 @@ namespace Appium.Net.Integration.Tests.Android.Device
         public void CanGetDisplayDensityTest()
         {
             var androidDriver = (AndroidDriver<IWebElement>)_driver;
-            Assert.That(androidDriver.GetDisplayDensity, Does.Not.EqualTo(0));
         }
-
-
     }
 }

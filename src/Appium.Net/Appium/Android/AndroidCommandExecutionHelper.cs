@@ -12,6 +12,7 @@
 //See the License for the specific language governing permissions and
 //limitations under the License.
 
+using System;
 using OpenQA.Selenium.Appium.Interfaces;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
@@ -104,15 +105,17 @@ namespace OpenQA.Selenium.Appium.Android
         public static void ToggleAirplaneMode(IExecuteMethod executeMethod) =>
             executeMethod.Execute(AppiumDriverCommand.ToggleAirplaneMode);
 
+        #endregion
+
+        #region Device System
+        public static void OpenNotifications(IExecuteMethod executeMethod) =>
+            executeMethod.Execute(AppiumDriverCommand.OpenNotifications);
+
         public static IDictionary<string, object> GetSystemBars(IExecuteMethod executeMethod) =>
             executeMethod.Execute(AppiumDriverCommand.SystemBars).Value as IDictionary<string, object>;
 
-        #endregion
-
-        #region Device Setting
-
-        public static float GetDisplayDensity(IExecuteMethod executeMethod) =>
-           (float) executeMethod.Execute(AppiumDriverCommand.GetDisplayDensity).Value;
+        public static float GetDisplayDensity(IExecuteMethod executeMethod) => Convert.ToSingle(
+            executeMethod.Execute(AppiumDriverCommand.GetDisplayDensity).Value);
         
         #endregion
 
@@ -120,9 +123,6 @@ namespace OpenQA.Selenium.Appium.Android
             executeMethod.Execute(AppiumDriverCommand.EndTestCoverage,
                 new Dictionary<string, object>()
                     {["intent"] = intent, ["path"] = path}).Value as string;
-
-        public static void OpenNotifications(IExecuteMethod executeMethod) =>
-            executeMethod.Execute(AppiumDriverCommand.OpenNotifications);
 
         public static bool IsLocked(IExecuteMethod executeMethod) =>
             (bool) executeMethod.Execute(AppiumDriverCommand.IsLocked).Value;
