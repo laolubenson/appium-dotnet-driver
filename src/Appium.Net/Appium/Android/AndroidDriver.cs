@@ -26,8 +26,8 @@ using OpenQA.Selenium.Appium.Interactions;
 namespace OpenQA.Selenium.Appium.Android
 {
     public class AndroidDriver<W> : AppiumDriver<W>, IFindByAndroidUIAutomator<W>, IFindByAndroidDataMatcher<W>, IStartsActivity,
-        IHasNetworkConnection, IHasClipboard, INetworkActions,
-        ISendsKeyEvents,
+        IHasNetworkConnection, IHasClipboard, INetworkActions, IHasDeviceDetails,
+        ISendsKeyEvents, 
         IPushesFiles, IHasSettings where W : IWebElement
     {
         private static readonly string Platform = MobilePlatform.Android;
@@ -201,6 +201,9 @@ namespace OpenQA.Selenium.Appium.Android
         public void ToggleLocationServices() => AndroidCommandExecutionHelper.ToggleLocationServices(this);
 
         public float GetDisplayDensity() => AndroidCommandExecutionHelper.GetDisplayDensity(this);
+
+        public IDictionary<string, object> GetSystemBars() => AndroidCommandExecutionHelper.GetSystemBars(this);
+
         #endregion
 
         /// <summary>

@@ -104,6 +104,9 @@ namespace OpenQA.Selenium.Appium.Android
         public static void ToggleAirplaneMode(IExecuteMethod executeMethod) =>
             executeMethod.Execute(AppiumDriverCommand.ToggleAirplaneMode);
 
+        public static IDictionary<string, object> GetSystemBars(IExecuteMethod executeMethod) =>
+            executeMethod.Execute(AppiumDriverCommand.SystemBars).Value as IDictionary<string, object>;
+
         #endregion
 
         #region Device Setting
