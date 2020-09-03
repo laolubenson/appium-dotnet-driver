@@ -200,7 +200,7 @@ namespace OpenQA.Selenium.Appium.Android
         /// </summary>
         public void ToggleLocationServices() => AndroidCommandExecutionHelper.ToggleLocationServices(this);
 
-
+        public float GetDisplayDensity() => AndroidCommandExecutionHelper.GetDisplayDensity(this);
         #endregion
 
         /// <summary>

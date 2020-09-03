@@ -106,6 +106,13 @@ namespace OpenQA.Selenium.Appium.Android
 
         #endregion
 
+        #region Device Setting
+
+        public static float GetDisplayDensity(IExecuteMethod executeMethod) =>
+           (float) executeMethod.Execute(AppiumDriverCommand.GetDisplayDensity).Value;
+        
+        #endregion
+
         public static string EndTestCoverage(IExecuteMethod executeMethod, string intent, string path) =>
             executeMethod.Execute(AppiumDriverCommand.EndTestCoverage,
                 new Dictionary<string, object>()

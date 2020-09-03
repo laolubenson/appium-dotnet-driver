@@ -157,6 +157,11 @@ namespace OpenQA.Selenium.Appium
         public const string GetAppStrings = "getAppStrings";
 
         /// <summary>
+        /// Get Display Density
+        /// </summary>
+        public const string GetDisplayDensity = "display_density";
+
+        /// <summary>
         /// Get App State Command.
         /// </summary>
         public const string GetAppState = "getAppState";
