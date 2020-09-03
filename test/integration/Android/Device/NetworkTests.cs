@@ -66,7 +66,5 @@ namespace Appium.Net.Integration.Tests.Android.Device
             var androidDriver = (AndroidDriver<IWebElement>)_driver;
             Assert.That(androidDriver.GetDisplayDensity, Does.Not.EqualTo(0));
         }
-
-
     }
 }
