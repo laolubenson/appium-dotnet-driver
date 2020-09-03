@@ -122,6 +122,11 @@ namespace OpenQA.Selenium.Appium
         public const string ToggleWiFi = "toggleWiFi";
 
         /// <summary>
+        /// Get System Bars
+        /// </summary>
+        public const string SystemBars = "system_bars";
+
+        /// <summary>
         /// Toggle Location Services Command.
         /// </summary>
         public const string ToggleLocationServices = "toggleLocationServices";

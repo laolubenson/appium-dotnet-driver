@@ -52,5 +52,12 @@ namespace Appium.Net.Integration.Tests.Android.Device
 
             androidDriver.ToggleAirplaneMode();
         }
+
+        [Test]
+        public void CanGetSystemBarInfoTest()
+        {
+            var androidDriver = (AndroidDriver<IWebElement>)_driver;
+            Assert.That(androidDriver.GetSystemBars().Count, Is.EqualTo(2));
+        }
     }
 }
