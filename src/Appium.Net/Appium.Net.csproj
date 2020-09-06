@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
+    <TargetFrameworks>net48;net47;net46;net45;netstandard2.0</TargetFrameworks>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <RootNamespace>OpenQA.Selenium</RootNamespace>
-    <AssemblyVersion>4.1.1</AssemblyVersion>
-    <Version>4.1.1</Version>
+    <AssemblyVersion>4.2.0</AssemblyVersion>
+    <Version>4.2.0</Version>
     <Company>Appium Commiters</Company>
     <Product>Appium-Dotnet-Driver</Product>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
@@ -26,7 +26,7 @@
 
   <PropertyGroup>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-    <FileVersion>4.1.1</FileVersion>
+    <FileVersion>4.2.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
