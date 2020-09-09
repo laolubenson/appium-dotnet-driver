@@ -2,7 +2,7 @@
 
 namespace OpenQA.Selenium.Appium.Interfaces
 {
-    public interface IHasDeviceDetails
+    public interface IHasAndroidDeviceDetails
     {
         /// <summary>
         /// Retrieve visibility and bounds information of the status and navigation bars

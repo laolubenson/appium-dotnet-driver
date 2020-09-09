@@ -16,6 +16,7 @@ using System;
 using OpenQA.Selenium.Appium.Interfaces;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using OpenQA.Selenium.Appium.Enums;
 
 namespace OpenQA.Selenium.Appium.Android
 {
@@ -99,15 +100,28 @@ namespace OpenQA.Selenium.Appium.Android
         }
 
         #region Device Network
+
         public static void ToggleLocationServices(IExecuteMethod executeMethod) =>
             executeMethod.Execute(AppiumDriverCommand.ToggleLocationServices);
 
         public static void ToggleAirplaneMode(IExecuteMethod executeMethod) =>
             executeMethod.Execute(AppiumDriverCommand.ToggleAirplaneMode);
 
+        public static void ToggleData(IExecuteMethod executeMethod) =>
+            executeMethod.Execute(AppiumDriverCommand.ToggleData);
+
+        public static void ToggleWifi(IExecuteMethod executeMethod) =>
+            executeMethod.Execute(AppiumDriverCommand.ToggleWiFi);
+
+        public static void GsmCall(IExecuteMethod executeMethod, string number, GsmCallActions gsmCallAction) =>
+            executeMethod.Execute(AppiumDriverCommand.GsmCall,
+                PrepareArguments(new[] {"phoneNumber", "action"},
+                    new object[] {number, gsmCallAction.ToString().ToLowerInvariant()}));
+
         #endregion
 
         #region Device System
+
         public static void OpenNotifications(IExecuteMethod executeMethod) =>
             executeMethod.Execute(AppiumDriverCommand.OpenNotifications);
 
@@ -116,13 +130,30 @@ namespace OpenQA.Selenium.Appium.Android
 
         public static float GetDisplayDensity(IExecuteMethod executeMethod) => Convert.ToSingle(
             executeMethod.Execute(AppiumDriverCommand.GetDisplayDensity).Value);
-        
+
         #endregion
 
         public static string EndTestCoverage(IExecuteMethod executeMethod, string intent, string path) =>
             executeMethod.Execute(AppiumDriverCommand.EndTestCoverage,
                 new Dictionary<string, object>()
                     {["intent"] = intent, ["path"] = path}).Value as string;
+
+        #region Device Performance
+
+        public static object[] GetPerformanceDataTypes(IExecuteMethod executeMethod) =>
+            executeMethod.Execute(AppiumDriverCommand.GetPerformanceDataTypes).Value as object[];
+
+        public static object[] GetPerformanceData(IExecuteMethod executeMethod, string packageName,
+            string dataType) => executeMethod.Execute(AppiumDriverCommand.GetPerformanceData,
+            PrepareArguments(new[] {"packageName", "dataType"},
+                new object[] {packageName, dataType})).Value as object[];
+
+        public static object[] GetPerformanceData(IExecuteMethod executeMethod, string packageName,
+            string dataType, int dataReadTimeout) => executeMethod.Execute(AppiumDriverCommand.GetPerformanceData,
+            PrepareArguments(new[] {"packageName", "dataType", "dataReadTimeout"},
+                new object[] {packageName, dataType, dataReadTimeout})).Value as object[];
+
+        #endregion
 
         public static bool IsLocked(IExecuteMethod executeMethod) =>
             (bool) executeMethod.Execute(AppiumDriverCommand.IsLocked).Value;

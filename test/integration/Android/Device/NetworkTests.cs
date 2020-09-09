@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Appium.Net.Integration.Tests.helpers;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Android;
+using OpenQA.Selenium.Appium.Enums;
 
 namespace Appium.Net.Integration.Tests.Android.Device
 {
@@ -15,7 +12,6 @@ namespace Appium.Net.Integration.Tests.Android.Device
     {
         private AppiumDriver<IWebElement> _driver;
         private AppiumOptions _androidOptions;
-        private const string ApiDemosPackageName = "io.appium.android.apis";
 
         [OneTimeSetUp]
         public void SetUp()
@@ -34,10 +30,12 @@ namespace Appium.Net.Integration.Tests.Android.Device
         }
 
         [Test]
-        public void CanToggleData()
+        public void CanToggleDataTest()
         {
-            _driver.ToggleData();
-            _driver.ToggleData();
+            var androidDriver = (AndroidDriver<IWebElement>)_driver;
+
+            androidDriver.ToggleData();
+            androidDriver.ToggleData();
         }
 
         [Test]
@@ -54,17 +52,30 @@ namespace Appium.Net.Integration.Tests.Android.Device
         }
 
         [Test]
-        public void CanGetSystemBarInfoTest()
+        public void CanToggleWifiTest()
         {
             var androidDriver = (AndroidDriver<IWebElement>)_driver;
-            Assert.That(androidDriver.GetSystemBars().Count, Is.EqualTo(2));
+            var beforeToggleConnectionType = androidDriver.ConnectionType;
+            androidDriver.ToggleWifi();
+
+            var currentConnectionType = androidDriver.ConnectionType;
+            Assert.That(currentConnectionType, Is.Not.EqualTo(beforeToggleConnectionType));
+
+            androidDriver.ToggleWifi();
         }
 
         [Test]
-        public void CanGetDisplayDensityTest()
+        public void CanMakeGsmCallTest()
         {
             var androidDriver = (AndroidDriver<IWebElement>)_driver;
-            Assert.That(androidDriver.GetDisplayDensity, Does.Not.EqualTo(0));
+
+            Assert.Multiple(() =>
+            {
+                Assert.DoesNotThrow(() => androidDriver.MakeGsmCall("5551234567", GsmCallActions.Call));
+                Assert.DoesNotThrow(() => androidDriver.MakeGsmCall("5551234567", GsmCallActions.Accept));
+                Assert.DoesNotThrow(() => androidDriver.MakeGsmCall("5551234567", GsmCallActions.Cancel));
+                Assert.DoesNotThrow(() => androidDriver.MakeGsmCall("5551234567", GsmCallActions.Hold));
+            });
         }
     }
 }

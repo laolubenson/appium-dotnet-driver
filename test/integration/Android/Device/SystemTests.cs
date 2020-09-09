@@ -32,13 +32,14 @@ namespace Appium.Net.Integration.Tests.Android.Device
         public void CanGetSystemBarInfoTest()
         {
             var androidDriver = (AndroidDriver<IWebElement>)_driver;
-            Assert.That(androidDriver.GetSystemBars().Count, Is.EqualTo(2));
+            Assert.That(androidDriver.GetSystemBars(), Is.Not.Null.And.Count.EqualTo(2));
         }
 
         [Test]
         public void CanGetDisplayDensityTest()
         {
             var androidDriver = (AndroidDriver<IWebElement>)_driver;
+            Assert.That(androidDriver.GetDisplayDensity(), Does.Not.EqualTo(0));
         }
     }
 }
