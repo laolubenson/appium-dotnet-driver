@@ -99,11 +99,23 @@ namespace OpenQA.Selenium.Appium.Android
         }
 
         #region Device Network
+
         public static void ToggleLocationServices(IExecuteMethod executeMethod) =>
             executeMethod.Execute(AppiumDriverCommand.ToggleLocationServices);
 
         public static void ToggleAirplaneMode(IExecuteMethod executeMethod) =>
             executeMethod.Execute(AppiumDriverCommand.ToggleAirplaneMode);
+
+        public static void ToggleData(IExecuteMethod executeMethod) =>
+            executeMethod.Execute(AppiumDriverCommand.ToggleData);
+
+        public static void ToggleWifi(IExecuteMethod executeMethod) =>
+            executeMethod.Execute(AppiumDriverCommand.ToggleWiFi);
+
+        public static void GsmCall(IExecuteMethod executeMethod, string number, GsmCallActions gsmCallAction) =>
+            executeMethod.Execute(AppiumDriverCommand.GsmCall,
+                PrepareArguments(new[] {"phoneNumber", "action"},
+                    new object[] {number, gsmCallAction.ToString().ToLowerInvariant()}));
 
         public static void SetGsmVoice(IExecuteMethod executeMethod, GsmVoiceState gsmVoiceState) =>
             executeMethod.Execute(AppiumDriverCommand.SetGsmVoiceState,
@@ -120,6 +132,23 @@ namespace OpenQA.Selenium.Appium.Android
 
         public static void OpenNotifications(IExecuteMethod executeMethod) =>
             executeMethod.Execute(AppiumDriverCommand.OpenNotifications);
+
+        #region Device Performance
+
+        public static object[] GetPerformanceDataTypes(IExecuteMethod executeMethod) =>
+            executeMethod.Execute(AppiumDriverCommand.GetPerformanceDataTypes).Value as object[];
+
+        public static object[] GetPerformanceData(IExecuteMethod executeMethod, string packageName,
+            string dataType) => executeMethod.Execute(AppiumDriverCommand.GetPerformanceData,
+            PrepareArguments(new[] {"packageName", "dataType"},
+                new object[] {packageName, dataType})).Value as object[];
+
+        public static object[] GetPerformanceData(IExecuteMethod executeMethod, string packageName,
+            string dataType, int dataReadTimeout) => executeMethod.Execute(AppiumDriverCommand.GetPerformanceData,
+            PrepareArguments(new[] {"packageName", "dataType", "dataReadTimeout"},
+                new object[] {packageName, dataType, dataReadTimeout})).Value as object[];
+
+        #endregion
 
         public static bool IsLocked(IExecuteMethod executeMethod) =>
             (bool) executeMethod.Execute(AppiumDriverCommand.IsLocked).Value;

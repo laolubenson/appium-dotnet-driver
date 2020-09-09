@@ -46,6 +46,11 @@ namespace OpenQA.Selenium.Appium
         public const string ToggleAirplaneMode = "toggleAirplaneMode";
 
         /// <summary>
+        /// Toggle Wifi Command.
+        /// </summary>
+        public const string GsmCall = "gsm_call";
+
+        /// <summary>
         /// Set GSM voice state
         /// </summary>
         public static string SetGsmVoiceState = "gsm_voice";
@@ -199,6 +204,10 @@ namespace OpenQA.Selenium.Appium
 
         public const string SetClipboard = "setClipboard";
 
+        public static string GetPerformanceData = "getPerformanceData";
+
+        public static string GetPerformanceDataTypes = "getSuppportedPerformanceDataTypes";
+
         #endregion Appium Specific extensions to JSONWP Commands
 
         #region TouchActions
@@ -312,8 +321,9 @@ namespace OpenQA.Selenium.Appium
 
         /// <summary>
         /// Represents the fingerPrint command
-        public const string FingerPrint = "fingerPrint";
         /// </summary>
+        public const string FingerPrint = "fingerPrint";
+
 
         public const string ReplaceValue = "replaceValue";
 

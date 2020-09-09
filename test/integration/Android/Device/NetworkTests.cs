@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Appium.Net.Integration.Tests.helpers;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -16,7 +12,6 @@ namespace Appium.Net.Integration.Tests.Android.Device
     {
         private AppiumDriver<IWebElement> _driver;
         private AppiumOptions _androidOptions;
-        private const string ApiDemosPackageName = "io.appium.android.apis";
 
         [OneTimeSetUp]
         public void SetUp()
@@ -35,10 +30,12 @@ namespace Appium.Net.Integration.Tests.Android.Device
         }
 
         [Test]
-        public void CanToggleData()
+        public void CanToggleDataTest()
         {
-            _driver.ToggleData();
-            _driver.ToggleData();
+            var androidDriver = (AndroidDriver<IWebElement>)_driver;
+
+            androidDriver.ToggleData();
+            androidDriver.ToggleData();
         }
 
         [Test]
@@ -55,14 +52,54 @@ namespace Appium.Net.Integration.Tests.Android.Device
         }
 
         [Test]
+        public void CanToggleWifiTest()
+        {
+            var androidDriver = (AndroidDriver<IWebElement>)_driver;
+            var beforeToggleConnectionType = androidDriver.ConnectionType;
+            androidDriver.ToggleWifi();
+
+            var currentConnectionType = androidDriver.ConnectionType;
+            Assert.That(currentConnectionType, Is.Not.EqualTo(beforeToggleConnectionType));
+
+            androidDriver.ToggleWifi();
+        }
+
+        [Test]
+        public void CanMakeGsmCallTest()
+        {
+            var androidDriver = (AndroidDriver<IWebElement>)_driver;
+
+            Assert.Multiple(() =>
+            {
+                Assert.DoesNotThrow(() => androidDriver.MakeGsmCall("5551234567", GsmCallActions.Call));
+                Assert.DoesNotThrow(() => androidDriver.MakeGsmCall("5551234567", GsmCallActions.Accept));
+                Assert.DoesNotThrow(() => androidDriver.MakeGsmCall("5551234567", GsmCallActions.Cancel));
+                Assert.DoesNotThrow(() => androidDriver.MakeGsmCall("5551234567", GsmCallActions.Hold));
+            });
+        }
+
+        [Test]
         public void CanSetGsmVoiceStateTest()
         {
             var androidDriver = (AndroidDriver<IWebElement>)_driver;
 
-            Assert.DoesNotThrow(() =>
-                androidDriver.SetGsmVoice(GsmVoiceState.Roaming));
-
-            androidDriver.SetGsmVoice(GsmVoiceState.On);
+            Assert.Multiple(() =>
+            {
+                Assert.DoesNotThrow(() =>
+                    androidDriver.SetGsmVoice(GsmVoiceState.Unregistered));
+                Assert.DoesNotThrow(() =>
+                    androidDriver.SetGsmVoice(GsmVoiceState.Denied));
+                Assert.DoesNotThrow(() =>
+                    androidDriver.SetGsmVoice(GsmVoiceState.Off));
+                Assert.DoesNotThrow(() =>
+                    androidDriver.SetGsmVoice(GsmVoiceState.Unregistered));
+                Assert.DoesNotThrow(() =>
+                    androidDriver.SetGsmVoice(GsmVoiceState.On));
+                Assert.DoesNotThrow(() =>
+                    androidDriver.SetGsmVoice(GsmVoiceState.Roaming));
+                Assert.DoesNotThrow(() =>
+                    androidDriver.SetGsmVoice(GsmVoiceState.Searching));
+            });
         }
     }
 }
