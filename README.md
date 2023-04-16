@@ -1,12 +1,27 @@
-# appium-dotnet-driver
+# dotnet-client
 
-[![NuGet version](https://badge.fury.io/nu/Appium.WebDriver.svg)](https://badge.fury.io/nu/Appium.WebDriver)
-[![NuGet Downloads](https://img.shields.io/nuget/dt/Appium.Webdriver.svg)](https://www.nuget.org/packages/Appium.Webdriver)
+![Nuget](https://img.shields.io/nuget/v/Appium.WebDriver)
+[![Build Status](https://dev.azure.com/AppiumCI/dotnet-client/_apis/build/status/appium.dotnet-client?branchName=master)](https://dev.azure.com/AppiumCI/dotnet-client/_build/latest?definitionId=68&branchName=master)
 
-[![Build Status](https://dev.azure.com/AppiumCI/dotnet-client/_apis/build/status/appium.appium-dotnet-driver?branchName=master)](https://dev.azure.com/AppiumCI/dotnet-client/_build/latest?definitionId=13&branchName=master)
+![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/Appium.WebDriver)
+[![Build Status](https://dev.azure.com/AppiumCI/dotnet-client/_apis/build/status/appium.dotnet-client?branchName=release%2F5.0.0)](https://dev.azure.com/AppiumCI/dotnet-client/_build/latest?definitionId=68&branchName=release%2F5.0.0)
+
 
 This driver is an extension of the [Selenium](http://docs.seleniumhq.org/) C# client. It has 
 all the functionalities of the regular driver, but add Appium specific methods on top of this.
+
+> **Note**
+>
+> The last stable version(v4.4.0) supports the legacy Selenium 3.150.0.<br/>	 
+> In case you would like to use this client with Selenium 4.0 and above, please use the latest beta version(v5.0.0). <br/>
+> We are well aware this project is not actively maintained, therefore any contributors are more than welcomed to assist with this project.
+
+## Appium server compatibility for v5.x 
+
+In case you are using the latest beta client v5.x please be aware you will either have to upgrade your appium server to 2.x or add the base-path argument:
+`appium --base-path=/wd/hub`, due to a breaking change on the default server base path. <br/>
+Regardless, it's highly recommended you move to appium 2.x since appium 1.x is no longer maintained. <br/>
+For more details about how to migrate to 2.x, see the following link : [appium 2.x migrating](https://appium.github.io/appium/docs/en/2.0/guides/migrating-1-to-2/)
 
 ## NuGet
 
@@ -32,7 +47,7 @@ Note: we will NOT publish a signed version of this assembly since the dependenci
 
 [Read Wiki](https://github.com/appium/appium-dotnet-driver/wiki)
 
-[See samples here](https://github.com/appium/sample-code/tree/master/sample-code/examples/dotnet/AppiumDotNetSample)
+[See samples here](https://github.com/appium/appium-dotnet-driver/tree/master/test/integration)
 
 
 ## Dev Build+Test 
@@ -52,15 +67,22 @@ Visual studio
 - Open with [Visual Studio](https://www.visualstudio.com/)
 - build solution
 
-## Nuget Deployment (for maintainers)
+## NuGet Deployment (for maintainers)
 
-### To Setup Nuget 
-- Download [Nuget exe](http://nuget.org/nuget.exe).
-- Setup the Api Key ([see here](http://docs.nuget.org/docs/creating-packages/creating-and-publishing-a-package#api-key)).
-- `alias NuGet='mono <Nuget Path>/NuGet.exe'`
-
+### To Setup NuGet 
+- Download [NuGet exe](https://dist.nuget.org/win-x86-commandline/latest/nuget.exe).
+- [install the NuGet CLI](https://learn.microsoft.com/en-us/nuget/install-nuget-client-tools#nugetexe-cli) for your preffered OS. 
+  > Windows <br/>
+    Add the folder where you placed nuget.exe to your PATH environment variable. <br/>
+  > macOS/Linux <br/>
+    `alias NuGet='mono <Nuget Path>/NuGet.exe'` <br/>
+    
+- Setup the Api Key ([see here](https://learn.microsoft.com/en-us/nuget/reference/cli-reference/cli-ref-setapikey)).
 
 ### To Release a New Version
+
+Auto release follow the rule in github/labeler.yml
+
 - update assemblyInfo.cs, RELEASE_NOTES.md, and appium-dotnet-driver.nuspec with new new version number and release details, then check it in
 - pull new code
 - `Rebuild All` with `Release` target.

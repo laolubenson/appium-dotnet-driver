@@ -5,9 +5,10 @@
 
 trigger:
 - master
+- release/*
 
 pool:
-  vmImage: 'VS2017-Win2016'
+  vmImage: 'windows-latest'
 
 variables:
   solution: '**/*.sln'
@@ -28,7 +29,11 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-# - task: VSTest@2
-#   inputs:
-#     platform: '$(buildPlatform)'
-#     configuration: '$(buildConfiguration)'
+- task: DotNetCoreCLI@2
+  enabled: false
+  displayName: 'Run unit tests - $(buildConfiguration)'
+  inputs:
+    command: 'test'
+    arguments: '--no-build --configuration $(buildConfiguration) --filter Name~CheckAbilityToBuildDefaultService'
+    publishTestResults: true
+    projects: '**/*.Tests.csproj'
